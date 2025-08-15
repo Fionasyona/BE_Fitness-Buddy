@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import Activity, Profile
 
+
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -12,35 +13,36 @@ class RegisterSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        # Create the user
         user = User.objects.create_user(
             username=validated_data['username'],
             email=validated_data['email'],
             password=validated_data['password']
         )
-        # Automatically create a Profile linked to the user
         Profile.objects.create(user=user)
         return user
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'email']
 
+
 class ProfileSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)  # Show basic user info in Profile
+    user = UserSerializer(read_only=True)
 
     class Meta:
         model = Profile
         fields = '__all__'
 
+
 class ActivitySerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True) 
+    user = UserSerializer(read_only=True)
 
     class Meta:
         model = Activity
         fields = '__all__'
-        read_only_fields = ['user']  # User is assigned automatically
+        read_only_fields = ['user']
 
     def validate(self, data):
         if not data.get('activity_type'):
@@ -52,7 +54,6 @@ class ActivitySerializer(serializers.ModelSerializer):
         if not data.get('date'):
             raise serializers.ValidationError({"date": "Date is required."})
 
-        
         if 'distance' in data and data['distance'] is not None and data['distance'] < 0:
             raise serializers.ValidationError({"distance": "Distance cannot be negative."})
 
@@ -60,6 +61,7 @@ class ActivitySerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({"calories_burned": "Calories burned cannot be negative."})
 
         return data
+
 
 class ActivityMetricsSerializer(serializers.Serializer):
     total_duration = serializers.FloatField()

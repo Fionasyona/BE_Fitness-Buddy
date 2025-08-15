@@ -1,33 +1,39 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Profile Table 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    age = models.IntegerField(null=True, blank=True)
-    weight = models.FloatField(null=True, blank=True)  
-    height = models.FloatField(null=True, blank=True) 
-    gender = models.CharField(max_length=20, null=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    bio = models.TextField(blank=True, null=True)
+    age = models.PositiveIntegerField(blank=True, null=True)
+    weight = models.FloatField(blank=True, null=True)  # in kg
+    height = models.FloatField(blank=True, null=True)  # in cm
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.user.username
+        return f"{self.user.username}'s Profile"
 
-# Activity Table
+
 class Activity(models.Model):
     ACTIVITY_CHOICES = [
-        ('Running', 'Running'),
-        ('Cycling', 'Cycling'),
-        ('Weightlifting', 'Weightlifting'),
-        ('Swimming', 'Swimming'),
-        ('Walking', 'Walking'),
+        ("Running", "Running"),
+        ("Cycling", "Cycling"),
+        ("Weightlifting", "Weightlifting"),
+        ("Swimming", "Swimming"),
+        ("Walking", "Walking"),
+        ("Other", "Other"),
     ]
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="activities")
     activity_type = models.CharField(max_length=50, choices=ACTIVITY_CHOICES)
-    duration = models.PositiveIntegerField()  # minutes
-    distance = models.FloatField(null=True, blank=True)  # km
-    calories_burned = models.FloatField()
+    duration = models.FloatField()  # in minutes
+    distance = models.FloatField(blank=True, null=True)  # in km
+    calories_burned = models.FloatField(blank=True, null=True)
     date = models.DateField()
+    notes = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-date"]
 
     def __str__(self):
-        return f"{self.activity_type} - {self.user.username}"
+        return f"{self.activity_type} - {self.user.username} on {self.date}"
