@@ -16,7 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from .import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+     # CRUD
+    path('api/activities/', views.ActivityListCreateView.as_view(), name='activity-list-create'),
+    path('api/activities/<int:pk>/', views.ActivityRetrieveUpdateDeleteView.as_view(), name='activity-detail'),
+
+    # Extra Features
+    path('api/activities/history/', views.activity_history, name='activity-history'),
+    path('api/activities/metrics/', views.activity_metrics, name='activity-metrics'),
 ]
