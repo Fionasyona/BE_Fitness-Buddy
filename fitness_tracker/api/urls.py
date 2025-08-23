@@ -15,6 +15,5 @@ urlpatterns = [
 
     # Metrics
     path('activities/metrics/', views.ActivityMetricsView.as_view(), name='activity-metrics'),
-    path('activities/filter/', views.ActivityFilterView.as_view(), name='activity-filter'),
 
 ]
