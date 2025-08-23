@@ -85,7 +85,6 @@ USE_TZ = True
 
 # STATIC FILES
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']  # if you have a static folder in dev
 STATIC_ROOT = BASE_DIR / 'staticfiles'    # where collectstatic will store files
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
