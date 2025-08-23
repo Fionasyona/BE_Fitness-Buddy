@@ -24,11 +24,12 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # Local apps
-    'tracker',  # your fitness tracker app
+    'fitness_tracker',  # your fitness tracker app
 ]
 
 # MIDDLEWARE
 MIDDLEWARE = [
+    
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',  # Whitenoise for static files
     'django.contrib.sessions.middleware.SessionMiddleware',
