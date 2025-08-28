@@ -14,28 +14,33 @@ class Profile(models.Model):
 
 
 class Activity(models.Model):
-    ACTIVITY_CHOICES = [
-        ('Running', 'Running'),
-        ('Cycling', 'Cycling'),
-        ('Weightlifting', 'Weightlifting'),
-        ('Swimming', 'Swimming'),
-        ('Walking', 'Walking'),
-        ('Yoga', 'Yoga'),
+    EXERCISE_CHOICES = [
+        ('Push Ups', 'Push Ups'),
+        ('Sit Ups', 'Sit Ups'),
+        ('Squats', 'Squats'),
+        ('Lunges', 'Lunges'),
+        ('Plank', 'Plank'),
+        ('Burpees', 'Burpees'),
+        ('Jumping Jacks', 'Jumping Jacks'),
+        ('Pull Ups', 'Pull Ups'),
+        ('Bench Press', 'Bench Press'),
+        ('Deadlift', 'Deadlift'),
         ('Other', 'Other'),
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='activities')
-    activity_type = models.CharField(max_length=50, choices=ACTIVITY_CHOICES)
+    exercise_type = models.CharField(max_length=50, choices=EXERCISE_CHOICES, default= 'other') 
     duration_minutes = models.PositiveIntegerField()  # Duration in minutes
-    distance_km = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)  # Optional
+    reps = models.PositiveIntegerField(null=True, blank=True) 
+    sets = models.PositiveIntegerField(null=True, blank=True)  # Optional
     calories_burned = models.PositiveIntegerField(null=True, blank=True)
     date = models.DateField()
 
-    created_at = models.DateTimeField(auto_now_add=True)  # Track creation time
-    updated_at = models.DateTimeField(auto_now=True)      # Track update time
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-date', '-created_at']  # Default sorting: newest first
+        ordering = ['-date', '-created_at']
 
     def __str__(self):
-        return f"{self.activity_type} by {self.user.username} on {self.date}"
+        return f"{self.exercise_type} by {self.user.username} on {self.date}"
