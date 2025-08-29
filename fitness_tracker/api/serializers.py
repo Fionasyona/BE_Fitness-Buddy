@@ -59,6 +59,12 @@ class ActivitySerializer(serializers.ModelSerializer):
 
         if 'calories' in data and data['calories'] is not None and data['calories'] < 0:
             raise serializers.ValidationError({"calories": "Calories cannot be negative."})
+        
+        if 'reps' in data and data['reps'] is not None and data['reps'] < 0:
+            raise serializers.ValidationError({"reps": "Reps cannot be negative."})
+        
+        if 'sets' in data and data['sets'] is not None and data['sets'] < 0:
+            raise serializers.ValidationError({"sets": "Sets cannot be negative."}) 
 
         return data
 

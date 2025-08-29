@@ -51,14 +51,14 @@ fitness_tracker/
      *POST* /api/register/
      *Request Body*
       json
-    {
-        "username": "Angel",
-        "email" : "angelwall@gmail.com",
-        "password": "passA123word@"
-    }
+   
       
       *Response*
-      json
+      json {
+        "username": "John",
+        "email" : "johnenglish@gmail.com",
+        "password": "pass123jWOrd"
+    }
       {
         "message": "User registered successfully"
       }
@@ -69,9 +69,9 @@ fitness_tracker/
      json
      {
         "id": 1,
-        "username": "Angel",
-        "email" : "angelwall@gmail.com",
-        "date_joined": "2025-08-28T14:07:27"
+        "username": "John",
+        "email" : "johnenglish@gmail.com",
+        "date_joined": "2025-08-29T14:07:27"
      }    
 
 ## Authentication Endpoints
@@ -80,8 +80,8 @@ fitness_tracker/
      *Request body*
      json
      {
-        "username": "Agnes",
-        "password": "xM6NUXSsQmtM@rL"
+        "username": "John",
+        "password": "pass123jWOrd"
      }
 
      *Response*
@@ -115,7 +115,9 @@ fitness_tracker/
           "activity_type": "Squats",
           "duration_minutes": 45,
           "calories": 350,
-          "date": "2025-08-28"
+          "reps": 12,
+          "sets":3,
+          "date": "2025-08-29"
       }
 
        *POST*
@@ -125,7 +127,9 @@ fitness_tracker/
           "activity_type": "Squats",
           "duration_minutes": 45,
           "calories": 350,
-          "date": "2025-08-28"
+          "reps": 12,
+          "sets": 3,
+          "date": "2025-08-29"
        }
 2. Retrieve,Update,Delete Activities
       *GET*/*PUT*/*DELETE*/api/activities/<id>/
@@ -138,7 +142,9 @@ fitness_tracker/
           "activity_type": "Squats",
           "duration_minutes": 45,
           "calories": 350,
-          "date": "2025-08-28"
+          "reps" : 12,
+          "sets" : 3,
+          "date": "2025-08-29"
      }
 
 3. Activity History with Filter
@@ -152,7 +158,9 @@ fitness_tracker/
           "activity_type": "Squats",
           "duration_minutes": 45,
           "calories": 350,
-          "date": "2025-08-28"
+          "reps": 12,
+          "sets": 3,
+          "date": "2025-08-29"
       }
        ]
 4. Activity Metric

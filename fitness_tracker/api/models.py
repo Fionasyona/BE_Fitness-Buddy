@@ -35,7 +35,7 @@ class Activity(models.Model):
     sets = models.PositiveIntegerField(null=True, blank=True)  # Optional
     calories = models.PositiveIntegerField(null=True, blank=True)
     date = models.DateField()
-
+    
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
