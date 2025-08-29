@@ -29,11 +29,11 @@ class Activity(models.Model):
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='activities')
-    exercise_type = models.CharField(max_length=50, choices=EXERCISE_CHOICES, default= 'other') 
+    activity_type = models.CharField(max_length=50, choices=EXERCISE_CHOICES, default= 'other') 
     duration_minutes = models.PositiveIntegerField()  # Duration in minutes
     reps = models.PositiveIntegerField(null=True, blank=True) 
     sets = models.PositiveIntegerField(null=True, blank=True)  # Optional
-    calories_burned = models.PositiveIntegerField(null=True, blank=True)
+    calories = models.PositiveIntegerField(null=True, blank=True)
     date = models.DateField()
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -43,4 +43,4 @@ class Activity(models.Model):
         ordering = ['-date', '-created_at']
 
     def __str__(self):
-        return f"{self.exercise_type} by {self.user.username} on {self.date}"
+        return f"{self.activity_type} by {self.user.username} on {self.date}"

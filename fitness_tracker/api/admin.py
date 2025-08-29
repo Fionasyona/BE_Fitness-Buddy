@@ -7,9 +7,8 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'user__email')
     list_filter = ('created_at',)
 
-
 @admin.register(Activity)
 class ActivityAdmin(admin.ModelAdmin):
-    list_display = ('user', 'exercise_type', 'sets', 'reps', 'duration_minutes', 'calories_burned', 'date', 'created_at')
-    search_fields = ('user__username', 'exercise_type')
-    list_filter = ('exercise_type', 'date', 'created_at')
+    list_display = ('user', 'activity_type', 'duration_minutes', 'calories', 'date', 'created_at')
+    search_fields = ('user__username', 'activity_type')
+    list_filter = ('activity_type', 'date')

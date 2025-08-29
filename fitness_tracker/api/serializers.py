@@ -24,7 +24,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model: User 
+        model = User   # ✅ fixed
         fields = ['id', 'username', 'email']
 
 
@@ -48,8 +48,8 @@ class ActivitySerializer(serializers.ModelSerializer):
         if not data.get('activity_type'):
             raise serializers.ValidationError({"activity_type": "Activity type is required."})
 
-        if not data.get('duration') or data['duration'] <= 0:
-            raise serializers.ValidationError({"duration": "Duration must be greater than 0."})
+        if not data.get('duration_minutes') or data['duration_minutes'] <= 0:
+            raise serializers.ValidationError({"duration_minutes": "Duration must be greater than 0."})
 
         if not data.get('date'):
             raise serializers.ValidationError({"date": "Date is required."})
@@ -57,8 +57,8 @@ class ActivitySerializer(serializers.ModelSerializer):
         if 'distance' in data and data['distance'] is not None and data['distance'] < 0:
             raise serializers.ValidationError({"distance": "Distance cannot be negative."})
 
-        if 'calories_burned' in data and data['calories_burned'] is not None and data['calories_burned'] < 0:
-            raise serializers.ValidationError({"calories_burned": "Calories burned cannot be negative."})
+        if 'calories' in data and data['calories'] is not None and data['calories'] < 0:
+            raise serializers.ValidationError({"calories": "Calories cannot be negative."})
 
         return data
 

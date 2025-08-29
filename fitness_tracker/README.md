@@ -43,3 +43,126 @@ fitness_tracker/
 | GET    | `/api/activities/<id>/` | Retrieve activity details |
 | PUT    | `/api/activities/<id>/` | Update an activity        |
 | DELETE | `/api/activities/<id>/` | Delete an activity        |
+
+## Endpoints
+
+ ## User Endpoints
+1.*Register User*
+     *POST* /api/register/
+     *Request Body*
+      json
+    {
+        "username": "Angel",
+        "email" : "angelwall@gmail.com",
+        "password": "passA123word@"
+    }
+      
+      *Response*
+      json
+      {
+        "message": "User registered successfully"
+      }
+
+2.*User Profile*
+     *GET* /api/profile/
+     *Request body*
+     json
+     {
+        "id": 1,
+        "username": "Angel",
+        "email" : "angelwall@gmail.com",
+        "date_joined": "2025-08-28T14:07:27"
+     }    
+
+## Authentication Endpoints
+1. Obtain Token
+     *POST*/api/token/
+     *Request body*
+     json
+     {
+        "username": "Agnes",
+        "password": "xM6NUXSsQmtM@rL"
+     }
+
+     *Response*
+     json
+     {
+        "refresh": "refresh_token_here",
+        "access": "access_token_here"
+     }
+
+2. Refresh Token
+     *POST* /api/token/refresh/
+     *Request body*
+     json
+     {
+        "refresh": "refresh_token_here"
+     }
+
+      *Response*
+     json
+     {
+        "access": "new_access_token_here"
+     }
+
+## Activity Endpoints
+1. List & Create Activities
+      *GET*/*POST*/api/activities/
+      *POST*
+      *Request body*
+      json
+      {
+          "activity_type": "Squats",
+          "duration_minutes": 45,
+          "calories": 350,
+          "date": "2025-08-28"
+      }
+
+       *POST*
+       *Response*
+       json
+       {
+          "activity_type": "Squats",
+          "duration_minutes": 45,
+          "calories": 350,
+          "date": "2025-08-28"
+       }
+2. Retrieve,Update,Delete Activities
+      *GET*/*PUT*/*DELETE*/api/activities/<id>/
+      *GET*
+      *Request*
+      json
+     
+     {
+         "id":1,
+          "activity_type": "Squats",
+          "duration_minutes": 45,
+          "calories": 350,
+          "date": "2025-08-28"
+     }
+
+3. Activity History with Filter
+      *GET*/api/activities/history/?type=Squats&date=2025-08-28
+      *GET*
+      *Request*
+       json
+       [
+      {
+          "id":1,
+          "activity_type": "Squats",
+          "duration_minutes": 45,
+          "calories": 350,
+          "date": "2025-08-28"
+      }
+       ]
+4. Activity Metric
+       *GET*/api/activities/metrics/
+       *Response*
+        json
+        {
+           "total_activities": 10,
+           "total_duration": 420,
+           "total_calories": 3500
+       }
+     
+
